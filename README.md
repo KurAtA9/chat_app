@@ -36,7 +36,7 @@
 | content    | VARCHAR(128) |                                    |
 | user_id    | INT          | NOT NULL                           |
 | room_id    | INT          | NOT NULL                           |
-| image      | VARCHAR(512) | NOT NULL                           |
+| image      | VARCHAR(512) |                                    |
 | created_at | TIMESTAMP    | NOT NULL DEFAULT CURRENT_TIMESTAMP |
 ### Option
 - PRIMARY KEY (id)

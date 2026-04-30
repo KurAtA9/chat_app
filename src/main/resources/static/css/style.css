@@ -1,3 +1,41 @@
 *{
   box-sizing: border-box;
 }
+.wrapper{
+  display: flex;
+}
+
+.side{
+  width: 300px;
+  height: 100vh;
+}
+.side-header{
+  height: 100px;
+  background-color: #d12626;
+  padding: 0 20px;
+}
+.rooms{
+  height: calc(100vh - 100px);
+  background-color: #c72fd4;
+  padding: 0 20px;
+}
+
+.main{
+  width: calc(100vw - 300px);
+  height: 100vh;
+}
+.main-header{
+  height: 100px;
+  background-color: #4d74c9;
+  padding: 0 40px;
+}
+.chatroom{
+  height: calc(100vh - 100px - 90px);
+  background-color: #e9e625;
+  padding: 46px 40px 0;
+}
+.form{
+  height: 90px;
+  background-color: #32d179;
+  padding: 20px 40px;
+}

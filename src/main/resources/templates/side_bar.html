@@ -3,7 +3,7 @@
 <div th:fragment="side_bar">
   <div class="side-header">
     <a class="username" th:href="@{/users/{userId}/edit(userId=${user.id})}" th:text="${user.name}">ユーザー名</a>
-    <a class="create-room" href="#">チャット作成</a> 
+    <a class="create-room" th:href="@{/rooms/new}">チャット作成</a> 
   </div>
   <div class="rooms">
     <div class="room">

@@ -16,13 +16,15 @@
       <div class="chat-content">やっほー</div>
     </div> 
   </div>
-  <div class="form">
-    <div class="chat-input">
-      <input type="text" class="chat-message" placeholder="type a message">
-      <span class="image-file">画像</span>
-      <input type="file" class="hidden">
+  <form th:action="@{/rooms/{roomId}/messages (roomId=${roomId})}" method="post" th:object="${messageForm}" class="form">
+    <div class="form-input">
+      <input th:field="*{content}" class="form-message" placeholder="type a message">
+      <label class="form-image">
+        <span class="image-file">画像</span>
+        <input type="file" class="hidden">
+      </label>
     </div>
     <input type="submit" class="chat-submit" value="送信">
-  </div>
+  </form>
 </div>
 </html>

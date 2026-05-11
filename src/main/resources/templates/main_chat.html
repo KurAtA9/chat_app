@@ -13,7 +13,7 @@
     <div th:each="message : ${messages}" class="message">
       <div class="upper-chat">
         <div class="chat-user" th:text="${message.user.name}">ユーザー名</div>
-        <div class="chat-date" th:text="${message.createdAt}">日付</div>
+        <div class="chat-date" th:text="${#dates.format(message.createdAt, 'yyyy/MM/dd HH:mm:ss')}">日付</div>
       </div>
       <div class="lower-message">
         <div class="chat-content" th:text="${message.content}">メッセージ内容</div>

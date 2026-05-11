@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,7 @@ import in.tech_camp.chat_app.repository.MessageRepository;
 import in.tech_camp.chat_app.repository.RoomRepository;
 import in.tech_camp.chat_app.repository.RoomUserRepository;
 import in.tech_camp.chat_app.repository.UserRepository;
+import in.tech_camp.chat_app.validation.ValidationOrder;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -44,7 +47,7 @@ public class MessageController {
     List<RoomEntity> roomList = roomUserEntities.stream().map(RoomUserEntity::getRoom).collect(Collectors.toList());
     model.addAttribute("rooms", roomList);
     model.addAttribute("messageForm",new MessageForm());
-    
+
     RoomEntity room = roomRepository.findById(roomId);
     model.addAttribute("room",room);
 
@@ -55,8 +58,13 @@ public class MessageController {
    }
 
   @PostMapping("/rooms/{roomId}/messages")
-  public String saveMessage(@PathVariable("roomId") Integer roomId, @ModelAttribute("messageForm") MessageForm messageForm, @AuthenticationPrincipal CustomUserDetail currentUser) {
+  public String saveMessage(@PathVariable("roomId") Integer roomId, @ModelAttribute("messageForm") @Validated(ValidationOrder.class) MessageForm messageForm, BindingResult bindingResult, @AuthenticationPrincipal CustomUserDetail currentUser) {
+    
     // DBにセットする情報：content,user_id,room_id,image（残り2つは勝手にやってくれる）→ @pathvariableでroomId, @AuthenticationPrincipalでログイン中のuser_idを、
+    if(bindingResult.hasErrors()){
+      return "redirect:/rooms/" + roomId + "/messages";
+    }
+
     MessageEntity message = new MessageEntity();
     message.setContent(messageForm.getContent());
 

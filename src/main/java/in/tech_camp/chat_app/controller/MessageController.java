@@ -25,6 +25,8 @@ import in.tech_camp.chat_app.repository.UserRepository;
 import in.tech_camp.chat_app.validation.ValidationOrder;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -81,4 +83,11 @@ public class MessageController {
 
    return String.format("redirect:/rooms/%d/messages", roomId);
   }
+
+  @PostMapping("/rooms/{roomId}/delete")
+  public String deleteRoom(@PathVariable Integer roomId) {
+    roomRepository.deleteById(roomId);
+    return "redirect:/";
+  }
+  
 }

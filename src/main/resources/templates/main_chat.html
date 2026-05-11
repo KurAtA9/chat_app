@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <div th:fragment="main_chat">
   <div class="main-header">
-    <div class="left-header">aaaaa</div>
+    <div class="left-header">
+      <div class="header-title" th:text="${room.name}">チャットルーム名</div>
+    </div>
     <div class="right-header">
       <a class="quitChat" href="#">チャット終了</a>
     </div>
@@ -18,7 +20,7 @@
       </div> 
     </div>
   </div>
-  <form th:action="@{/rooms/{roomId}/messages (roomId=${roomId})}" method="post" th:object="${messageForm}" class="form">
+  <form th:action="@{/rooms/{roomId}/messages (roomId=${room.id})}" method="post" th:object="${messageForm}" class="form">
     <div class="form-input">
       <input th:field="*{content}" class="form-message" placeholder="type a message">
       <label class="form-image">

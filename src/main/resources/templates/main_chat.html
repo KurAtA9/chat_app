@@ -8,13 +8,15 @@
     </div>
   </div>
   <div class="chatroom">
-    <div class="upper-chat">
-      <div class="chat-user">Tom</div>
-      <div class="chat-date">2020/2/21(null) 12:21:12</div>
+    <div th:each="message : ${messages}" class="message">
+      <div class="upper-chat">
+        <div class="chat-user" th:text="${message.user.name}">ユーザー名</div>
+        <div class="chat-date" th:text="${message.createdAt}">日付</div>
+      </div>
+      <div class="lower-message">
+        <div class="chat-content" th:text="${message.content}">メッセージ内容</div>
+      </div> 
     </div>
-    <div class="lower-message">
-      <div class="chat-content">やっほー</div>
-    </div> 
   </div>
   <form th:action="@{/rooms/{roomId}/messages (roomId=${roomId})}" method="post" th:object="${messageForm}" class="form">
     <div class="form-input">
